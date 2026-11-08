@@ -1,17 +1,67 @@
 {
   "blueprint": {
     "status": "COMPLETED",
-    "registered": true,
+    "registered": false,
     "blueprint_path": "C:\\OTHRYS\\repos\\OTHRYS\\blueprints\\sites\\jwt.json",
     "siteId": "jwt"
   },
   "scaffold": {
     "status": "COMPLETED",
     "repo_dir": "C:\\OTHRYS\\repos\\jwt",
-    "files_count": 17
+    "files_count": 3178
   },
   "cognitive_synthesize": {
-    "status": "ERROR",
-    "error": "unsupported format string passed to type.__format__"
+    "status": "COMPLETED",
+    "attempts": 2,
+    "chamber": "chamber-1-nvidia-nim",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b",
+    "tool_file": "C:\\OTHRYS\\repos\\jwt\\src\\tool.ts",
+    "test_file": "C:\\OTHRYS\\repos\\jwt\\tests\\tool.test.ts",
+    "main_file": "C:\\OTHRYS\\repos\\jwt\\src\\main.ts"
+  },
+  "seo": {
+    "status": "COMPLETED",
+    "robots_txt": true,
+    "sitemap_xml": true,
+    "og_image_svg": true
+  },
+  "optimize": {
+    "status": "OPTIMIZED",
+    "mandatory_section": "fine-tuning and optimization",
+    "passed_gates": [
+      "gate_header_sovereign_signature",
+      "gate_typography_hierarchy",
+      "gate_accessibility_dialogs",
+      "gate_zero_tracking_security",
+      "gate_design_tokens"
+    ],
+    "target": "C:\\OTHRYS\\repos\\jwt"
+  },
+  "verify_build": {
+    "status": "COMPLETED",
+    "tests_passed": true,
+    "build_succeeded": true,
+    "dist_compiled": true,
+    "test_output": "s\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m27 passed\u001b[39m\u001b[22m\u001b[90m (27)\u001b[39m\n\u001b[2m   Start at \u001b[22m 22:11:48\n\u001b[2m   Duration \u001b[22m 4.29s\u001b[2m (transform 49ms, setup 0ms, collect 76ms, tests 18ms, environment 580ms, prepare 107ms)\u001b[22m\n\n"
+  },
+  "git_publish": {
+    "status": "COMPLETED",
+    "repo": "vtcbelgium/jwt",
+    "gh_authenticated": true
+  },
+  "cloudflare_deploy": {
+    "status": "COMPLETED",
+    "pages_host": "be5a50c7.jwt-3wr.pages.dev",
+    "deployed": true
+  },
+  "dns_domain": {
+    "status": "COMPLETED",
+    "dns_provisioned": true,
+    "edge_verified_live": false,
+    "live_url": "https://jwt.othrys.be/"
+  },
+  "fleet_register": {
+    "status": "COMPLETED",
+    "fleet_file": "C:\\OTHRYS\\repos\\othrys-web\\lib\\sites.ts"
   }
 }
