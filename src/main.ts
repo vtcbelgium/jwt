@@ -73,5 +73,46 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('Copy failed: ' + (err instanceof Error ? err.message : String(err)));
     }
   });
+
+  // Auto-hydrate from URL query parameters (?q=, ?cron=, ?preset=, ?input=, etc.) & Share button
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const queryVal = params.get('q') || params.get('cron') || params.get('preset') || params.get('input') || params.get('pattern') || params.get('dialect') || params.get('mode');
+    if (queryVal && input) {
+      input.value = queryVal;
+      processBtn.click();
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  // Inject 🔗 Share Permalink button next to action buttons if not present
+  try {
+    const actionsContainer = processBtn.parentElement;
+    if (actionsContainer && !document.getElementById('action-share')) {
+      const shareBtn = document.createElement('button');
+      shareBtn.id = 'action-share';
+      shareBtn.type = 'button';
+      shareBtn.className = copyBtn.className || 'btn';
+      shareBtn.textContent = '🔗 Share Link';
+      shareBtn.style.marginLeft = '8px';
+      shareBtn.addEventListener('click', async () => {
+        const val = input.value.trim();
+        const url = new URL(window.location.origin + window.location.pathname);
+        if (val) {
+          url.searchParams.set('q', val);
+        }
+        try {
+          await navigator.clipboard.writeText(url.toString());
+          showToast('Shareable permalink copied to clipboard!');
+        } catch {
+          showToast('Failed to copy permalink');
+        }
+      });
+      actionsContainer.appendChild(shareBtn);
+    }
+  } catch (e) {
+    // ignore
+  }
 });
 
