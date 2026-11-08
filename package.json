@@ -1,0 +1,24 @@
+{
+  "name": "@jwt/app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "100% private in-browser JWT token decoder and claims inspector. Confidential bearer tokens never leave your browser.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@types/node": "^22.10.2",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "blueprint": {
+    "status": "COMPLETED",
+    "registered": true,
+    "blueprint_path": "C:\\OTHRYS\\repos\\OTHRYS\\blueprints\\sites\\jwt.json",
+    "siteId": "jwt"
+  },
+  "scaffold": {
+    "status": "COMPLETED",
+    "repo_dir": "C:\\OTHRYS\\repos\\jwt",
+    "files_count": 17
+  },
+  "cognitive_synthesize": {
+    "status": "ERROR",
+    "error": "unsupported format string passed to type.__format__"
+  }
+}
