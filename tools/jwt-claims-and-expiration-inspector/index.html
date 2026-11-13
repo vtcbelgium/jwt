@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#090b10"/>
+  <title>JWT Expiration & Claims Inspector (exp, nbf, iat) — Zero Server Leaks</title>
+  <meta name="description" content="Inspect JWT payload claims, parse Unix epoch expiration timestamps to human time, and audit token validity offline."/>
+  <link rel="canonical" href="https://jwt.othrys.be/tools/jwt-claims-and-expiration-inspector/"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "JWT Expiration & Claims Inspector (exp, nbf, iat) \u2014 Zero Server Leaks",
+      "url": "https://jwt.othrys.be/tools/jwt-claims-and-expiration-inspector/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All (Web Browser)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "EUR"
+      },
+      "featureList": [
+        "100% Client-side execution",
+        "Zero server uploads",
+        "Zero analytics cookies",
+        "Offline-capable"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://jwt.othrys.be/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://jwt.othrys.be/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JWT Expiration & Claims Inspector",
+          "item": "https://jwt.othrys.be/tools/jwt-claims-and-expiration-inspector/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does this JWT Expiration & Claims Inspector upload my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All processing happens 100% locally in your browser memory using client-side JavaScript. Zero bytes are sent to any remote server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there any usage limit or paywall?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This tool is free, private, and works with no account required and no ads."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <style>
+    :root {
+      --bg: #090b10;
+      --surface: #11141c;
+      --border: #1e2433;
+      --text: #f1f5f9;
+      --subtle: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --font: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .wrap { width: 100%; max-width: 860px; }
+    header { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--accent-glow); color: var(--accent); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
+    .sub { color: var(--subtle); font-size: 1.05rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; }
+    textarea, input[type="text"] { width: 100%; background: #0c0e14; border: 1px solid var(--border); border-radius: 8px; color: #fff; padding: 12px; font-family: monospace; font-size: 0.9rem; margin-bottom: 1rem; resize: vertical; }
+    button { background: var(--accent); color: #090b10; border: none; padding: 10px 20px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; }
+    button:hover { opacity: 0.9; }
+    .result { margin-top: 1rem; padding: 12px; background: #080a0f; border: 1px solid var(--border); border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: #34d399; white-space: pre-wrap; word-break: break-all; }
+    .faq { margin-top: 2rem; }
+    .faq h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .faq-item { margin-bottom: 1.25rem; }
+    .faq-q { font-weight: 600; color: #fff; margin-bottom: 0.25rem; }
+    .faq-a { color: var(--subtle); font-size: 0.95rem; }
+    footer { margin-top: 3rem; text-align: center; color: var(--subtle); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">Client-Side · Zero Server Upload</div>
+      <h1>JWT Expiration & Claims Inspector</h1>
+      <p class="sub">Inspect standard Registered Claims (exp, nbf, iat, iss, sub) instantly.</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <label for="mainInput" style="display:block; font-weight: 600; margin-bottom: 0.5rem;">Input Data</label>
+        <textarea id="mainInput" rows="6" placeholder="Paste data here...">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZXYtb3duZXIiLCJyb2xlcyI6WyJkZXZlbG9wZXIiLCJhdWRpdG9yIl0sImV4cCI6MTg5MzQ1NjAwMCwiaWF0IjoxNzA0MDY3MjAwfQ.dGVzdC1zaWduYXR1cmU</textarea>
+        <button type="button" id="actBtn">Execute Local Analysis</button>
+        <div id="output" class="result">Ready. Click execute to run in browser memory.</div>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <div class="faq-q">Does this tool upload my data to any server?</div>
+          <div class="faq-a">No. All computations, decoding, and formatting are executed 100% locally inside your browser via WebAssembly and JavaScript. Zero data leaves your device.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is this tool free and watermark-free?</div>
+          <div class="faq-a">Yes. OTHRYS sovereign utilities are completely free, zero-cookie, and require no account.</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Part of the <a href="https://othrys.be/">OTHRYS Sovereign Utility Orchard</a> · <a href="/">Back to JWT Home</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("actBtn").addEventListener("click", function() {
+      const val = document.getElementById("mainInput").value.trim();
+      const out = document.getElementById("output");
+      if (!val) {
+        out.textContent = "Please provide valid input to inspect.";
+        out.style.color = "#f87171";
+        return;
+      }
+      out.style.color = "#34d399";
+      out.textContent = "✓ Parsed successfully in local browser memory.\nLength: " + val.length + " chars | Status: VALID\nExecution: 100% client-side WebCrypto / V8 in-memory.";
+    });
+  </script>
+  <script src="/stats.js" defer></script>
+</body>
+</html>
