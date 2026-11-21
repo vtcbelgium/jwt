@@ -1,0 +1,7 @@
+Name: JWT Decoder & Expiry Inspector
+URL: https://jwt.othrys.be/
+Description: In-browser JSON Web Token (JWT) decoder and claims/expiry inspector so confidential bearer tokens never leave your browser.
+LLMs-Txt: https://jwt.othrys.be/llms.txt
+Sitemap: https://jwt.othrys.be/sitemap.xml
+Protocol: public-read-only
+Privacy: zero-tracking-cookies, local-browser-execution, zero-cloud-uploads
