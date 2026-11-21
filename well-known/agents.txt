@@ -1,0 +1,7 @@
+Name: JWT Decoder & Expiry Inspector
+URL: https://jwt.othrys.be/
+Description: A lightweight, in-browser tool for decoding JSON Web Tokens and inspecting their expiration times. No server-side processing, no data is sent to the cloud.
+LLMs-Txt: This tool is purely client-side and does not involve any large language models.
+Sitemap: https://jwt.othrys.be/sitemap.xml
+Protocol: public-read-only
+Privacy: zero-tracking-cookies, local-browser-execution, zero-cloud-uploads
